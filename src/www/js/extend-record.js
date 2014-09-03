@@ -1,3 +1,4 @@
+/*
 Copyright (c) 2014, EDINA.
 All rights reserved.
 
@@ -26,3 +27,32 @@ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT
 STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
 OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
 DAMAGE.
+*/
+
+"use strict";
+
+define(['records', 'utils'], function(records, utils){
+    
+    var addRecordProperties = function(e, annotation){
+        console.log("record properties added");
+        console.log(annotation);
+        annotation.record.id = utils.createUUID();
+        console.log(annotation.record.id);
+        
+        //TO-DO, investigate of how to add some of these through cordova plugin
+        //How about the camera ones?
+        annotation.record = records.addRecordProperty(annotation.record, "pos_sat", "");
+        annotation.record = records.addRecordProperty(annotation.record, "pos_acc", "");
+        annotation.record = records.addRecordProperty(annotation.record, "pos_tech", "");
+        annotation.record = records.addRecordProperty(annotation.record, "dev_os", "");
+        annotation.record = records.addRecordProperty(annotation.record, "cam_hoz", "");
+        annotation.record = records.addRecordProperty(annotation.record, "cam_vert", "");
+        annotation.record = records.addRecordProperty(annotation.record, "comp_bar", "");
+        annotation.record = records.addRecordProperty(annotation.record, "temp", "");
+        annotation.record = records.addRecordProperty(annotation.record, "press", "");
+
+    };
+    
+    $(document).on(records.EVT_EDIT_ANNOTATION, addRecordProperties);
+    
+});
