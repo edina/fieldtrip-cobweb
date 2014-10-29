@@ -1,0 +1,22 @@
+{
+  "name": "fieldtrip-cobweb",
+  "version": "0.1.0",
+  "homepage": "https://github.com/edina/fieldtrip-cobweb",
+  "authors": [
+    "Panos Terzis <P.Terzis@ed.ac.uk>"
+  ],
+  "main": "src/www/js/extend-record.js",
+  "keywords": [
+    "fieldtrip-open",
+    "cobweb",
+    "record"
+  ],
+  "license": "BSD",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
