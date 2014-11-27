@@ -42,7 +42,7 @@ define(['records', 'utils'], function(records, utils){
         //TO-DO, investigate of how to add some of these through cordova plugin
         //How about the camera ones?
         annotation.record = records.addRecordProperty(annotation.record, "pos_sat", "");
-        annotation.record = records.addRecordProperty(annotation.record, "pos_acc", "");
+        annotation.record = records.addRecordProperty(annotation.record, "pos_acc", -1);
         annotation.record = records.addRecordProperty(annotation.record, "pos_tech", "");
         annotation.record = records.addRecordProperty(annotation.record, "dev_os", "");
         annotation.record = records.addRecordProperty(annotation.record, "cam_hoz", "");
