@@ -32,15 +32,20 @@ DAMAGE.
 "use strict";
 
 define(['records', 'utils'], function(records, utils){
-    
+
     var addRecordProperties = function(e, annotation){
+        var annotations = records.loadEditorsMetadata();
+        var editorTitle = annotations[annotation.editorGroup][annotation.type].title;
+
         console.log("record properties added");
         console.log(annotation);
         annotation.record.id = utils.createUUID();
         console.log(annotation.record.id);
-        
+
+        console.log(records.loadEditorsMetadata());
         //TO-DO, investigate of how to add some of these through cordova plugin
         //How about the camera ones?
+        annotation.record = records.addRecordProperty(annotation.record, 'title', editorTitle);
         annotation.record = records.addRecordProperty(annotation.record, "pos_sat", "");
         annotation.record = records.addRecordProperty(annotation.record, "pos_acc", -1);
         annotation.record = records.addRecordProperty(annotation.record, "pos_tech", "");
@@ -52,7 +57,7 @@ define(['records', 'utils'], function(records, utils){
         annotation.record = records.addRecordProperty(annotation.record, "press", "");
 
     };
-    
+
     $(document).on(records.EVT_EDIT_ANNOTATION, addRecordProperties);
-    
+
 });
