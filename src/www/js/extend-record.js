@@ -39,8 +39,8 @@ define(['records', 'utils'], function(records, utils){
 
         console.log("record properties added");
         console.log(annotation);
-        annotation.record.id = utils.createUUID();
-        console.log(annotation.record.id);
+        annotation.record.properties.id = utils.createUUID();
+        console.log(annotation.record.properties.id);
 
         console.log(records.loadEditorsMetadata());
         //TO-DO, investigate of how to add some of these through cordova plugin
