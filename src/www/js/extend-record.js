@@ -57,14 +57,18 @@ define(['records', 'utils'], function(records, utils){
         annotation.record = records.addRecordProperty(annotation.record, "temp", "");
         annotation.record = records.addRecordProperty(annotation.record, "press", "");
         if(cordova && cordova.plugins && cordova.plugins.COBWEBSensorPlugin){
-            console.log("existsssssssssssssss");
-            cordova.plugins.COBWEBSensorPlugin.lineOfSight('', function(result){
-                    console.log(result);
-                },
-                function(error){
-                    console.error(error);
+            var addPropertFromCordova = function(result){
+                for(var key in result){
+                    annotation.record = records.addRecordProperty(annotation.record, key, result[key]);
                 }
-            );
+            };
+
+            var addPropertFromCordovaError = function(error){
+                console.log(error);
+            };
+
+            cordova.plugins.COBWEBSensorPlugin.lineOfSight('', addPropertFromCordova, addPropertFromCordovaError);
+            cordova.plugins.COBWEBSensorPlugin.deviceInfo('', addPropertFromCordova, addPropertFromCordovaError);
         }
 
     };
