@@ -30,6 +30,7 @@ DAMAGE.
 */
 
 "use strict";
+/* global cordova */
 
 define(['records', 'utils'], function(records, utils){
 
@@ -55,6 +56,16 @@ define(['records', 'utils'], function(records, utils){
         annotation.record = records.addRecordProperty(annotation.record, "comp_bar", "");
         annotation.record = records.addRecordProperty(annotation.record, "temp", "");
         annotation.record = records.addRecordProperty(annotation.record, "press", "");
+        if(cordova && cordova.plugins && cordova.plugins.COBWEBSensorPlugin){
+            console.log("existsssssssssssssss");
+            cordova.plugins.COBWEBSensorPlugin.lineOfSight('', function(result){
+                    console.log(result);
+                },
+                function(error){
+                    console.error(error);
+                }
+            );
+        }
 
     };
 
