@@ -51,8 +51,17 @@ define(['records', 'utils'], function(records, utils){
         annotation.record = records.addRecordProperty(annotation.record, "pos_acc", -1);
         annotation.record = records.addRecordProperty(annotation.record, "pos_tech", "");
         annotation.record = records.addRecordProperty(annotation.record, "dev_os", "");
-        annotation.record = records.addRecordProperty(annotation.record, "cam_hoz", "");
-        annotation.record = records.addRecordProperty(annotation.record, "cam_vert", "");
+        var viewAngle = sessionStorage.getItem("cameraViewAngle");
+        if(viewAngle !== null){
+            viewAngle = JSON.parse(viewAngle);
+            annotation.record = records.addRecordProperty(annotation.record, "cam_hoz", viewAngle.Horizontal);
+            annotation.record = records.addRecordProperty(annotation.record, "cam_vert", viewAngle.Vertical);
+            sessionStorage.removeItem("cameraViewAngle");
+        }
+        else{
+            annotation.record = records.addRecordProperty(annotation.record, "cam_hoz", "");
+            annotation.record = records.addRecordProperty(annotation.record, "cam_vert", "");
+        }
         annotation.record = records.addRecordProperty(annotation.record, "comp_bar", "");
         annotation.record = records.addRecordProperty(annotation.record, "temp", "");
         annotation.record = records.addRecordProperty(annotation.record, "press", "");
