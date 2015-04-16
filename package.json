@@ -1,6 +1,6 @@
 {
   "name": "fieldtrip-extend-record",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A fieldtrip plugin for extending the record",
   "main": "src/www/js/dtree.js",
   "scripts": {
