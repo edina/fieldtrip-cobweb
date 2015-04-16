@@ -1,0 +1,35 @@
+{
+  "name": "fieldtrip-extend-record",
+  "version": "0.1.1",
+  "description": "A fieldtrip plugin for extending the record",
+  "main": "src/www/js/dtree.js",
+  "scripts": {
+    "lint": "node_modules/jshint/bin/jshint src/www/js/**.js",
+    "release": "npm run lint && node_modules/release-it/bin/release.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/edina/fieldtrip-extend-record.git"
+  },
+  "keywords": [
+    "fieldtrip",
+    "cobweb",
+    "extend record"
+  ],
+  "authors": [
+    "P. Terzis, R. Gamez"
+  ],
+  "license": "BSD",
+  "dependencies": {
+    "jquery": "^1.11.2"
+  },
+  "devDependencies": {
+    "jshint": "2.5.3",
+    "release-it": "0.0.15"
+  },
+  "bugs": {
+    "url": "https://github.com/edina/fieldtrip-extend-record/issues"
+  },
+  "homepage": "https://github.com/edina/fieldtrip-extend-record"
+}
