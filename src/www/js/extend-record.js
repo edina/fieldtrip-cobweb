@@ -48,7 +48,7 @@ define(['records', 'utils'], function(records, utils){
         //How about the camera ones?
         annotation.record = records.addRecordProperty(annotation.record, 'title', editorTitle);
         annotation.record = records.addRecordProperty(annotation.record, "pos_sat", "");
-        annotation.record = records.addRecordProperty(annotation.record, "pos_acc", -1);
+        annotation.record = records.addRecordProperty(annotation.record, "pos_acc", null);
         annotation.record = records.addRecordProperty(annotation.record, "pos_tech", "");
         annotation.record = records.addRecordProperty(annotation.record, "dev_os", "");
         var viewAngle = sessionStorage.getItem("cameraViewAngle");
@@ -82,6 +82,11 @@ define(['records', 'utils'], function(records, utils){
 
     };
 
+    var updateAccuracy = function(e, annotation){
+        annotation.record = records.addRecordProperty(annotation.record, "pos_acc", -1);
+    };
+
     $(document).on(records.EVT_EDIT_ANNOTATION, addRecordProperties);
+    $(document).on(records.EVT_MOVE_ANNOTATION, updateAccuracy);
 
 });
