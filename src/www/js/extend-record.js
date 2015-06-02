@@ -82,8 +82,20 @@ define(['records', 'utils'], function(records, utils){
 
     };
 
-    var updateAccuracy = function(e, annotation){
-        annotation.record = records.addRecordProperty(annotation.record, "pos_acc", -1);
+    /**
+     * saves the pos_acc into the record properties
+     * -1 is for when marker was moved by user
+     * null for when GPS times out
+     * @param annotation
+     * @param {Boolean} moved
+     */
+    var updateAccuracy = function(e, annotation, moved){
+        if (moved) {
+            annotation.record = records.addRecordProperty(annotation.record, "pos_acc", -1);
+        }
+        else {
+            annotation.record = records.addRecordProperty(annotation.record, "pos_acc", annotation.record.geometry.gpsPosition.accuracy);
+        }
     };
 
     $(document).on(records.EVT_EDIT_ANNOTATION, addRecordProperties);
