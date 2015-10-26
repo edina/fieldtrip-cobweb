@@ -36,7 +36,13 @@ define(['records', 'utils'], function(records, utils){
 
     var addRecordProperties = function(e, annotation){
         var annotations = records.loadEditorsMetadata();
-        var editorTitle = annotations[annotation.editorGroup][annotation.type].title;
+        var editorTitle;
+        if(annotation.editorGroup in annotations) {
+            editorTitle = annotations[annotation.editorGroup][annotation.type].title;
+        }
+        else {
+            editorTitle = annotation.type;
+        }
 
         console.log("record properties added");
         console.log(annotation);
