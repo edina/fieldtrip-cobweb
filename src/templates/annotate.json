@@ -1,0 +1,12 @@
+{
+    "popups": {
+        "popup2":{
+            "template": "capture-image-check-popup.html",
+            "data": {
+                "question": "Photo could be blurred. What do you want to do?",
+                "keep": "Keep Image",
+                "retake": "Re-take Photo"
+            }
+        }
+    }
+}

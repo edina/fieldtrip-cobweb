@@ -32,7 +32,7 @@ DAMAGE.
 "use strict";
 /* global cordova */
 
-define(['records', 'utils'], function(records, utils){
+define(['records', 'utils', 'file'], function(records, utils, file){
 
     var addRecordProperties = function(e, annotation){
         var annotations = records.loadEditorsMetadata();
@@ -83,6 +83,37 @@ define(['records', 'utils'], function(records, utils){
     };
 
     /**
+     * Do some processing on photo that has just been taken. Check if image is
+     * blurred.
+     * @param e
+     * @param image Path to file.
+     * @param threshold Blur threshold.  Any variance below this value is deemed
+     * blurred.
+     */
+    var checkImage = function(e, image, threshold){
+        console.log("Check image " + image + ", threshold: "+ threshold);
+        $.mobile.loading('show', {
+            text: "Checking Image ...",
+            textonly: true,
+        });
+
+        cordova.plugins.qa.isBlurred(
+            function(blurred){
+                $.mobile.loading('hide');
+                if(blurred){
+                    $('#capture-image-check-popup').popup('open');
+                }
+            },
+            function(){
+                console.error("Problem with qa plugin");
+                $.mobile.loading('hide');
+            },
+            file.getFilePathWithoutProtocol(image),
+            threshold
+        );
+    };
+
+    /**
      * saves the pos_acc into the record properties
      * -1 is for when marker was moved by user
      * null for when GPS times out
@@ -100,5 +131,5 @@ define(['records', 'utils'], function(records, utils){
 
     $(document).on(records.EVT_EDIT_ANNOTATION, addRecordProperties);
     $(document).on(records.EVT_MOVE_ANNOTATION, updateAccuracy);
-
+    $(document).on(records.EVT_TAKE_PHOTO, checkImage);
 });
