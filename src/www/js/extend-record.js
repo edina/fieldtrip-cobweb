@@ -97,12 +97,29 @@ define(['records', 'utils', 'file'], function(records, utils, file){
      * blurred.
      */
     var checkImage = function(e, image, threshold){
-        console.log("Check image " + image + ", threshold: "+ threshold);
+        var imgPath = file.getFilePathWithoutProtocol(image);
+
+        var finish = function(){
+            $.mobile.loading('hide');
+        };
+
+        // popup click handler
+        $('#capture-image-check-popup a').on('vclick', function(e){
+            if($(event.target).attr('id') === 'capture-image-check-retake'){
+                // retake photo
+                $(".annotate-image").hide();
+                $(".image-chooser").show();
+            }
+
+            $('#capture-image-check-popup').popup('close');
+        });
+
         $.mobile.loading('show', {
             text: "Checking Image ...",
             textonly: true,
         });
 
+        // use qa plugin
         cordova.plugins.qa.isBlurred(
             function(blurred){
                 $.mobile.loading('hide');
@@ -114,8 +131,7 @@ define(['records', 'utils', 'file'], function(records, utils, file){
                 console.error("Problem with qa plugin");
                 $.mobile.loading('hide');
             },
-            file.getFilePathWithoutProtocol(image),
-            threshold
+            [imgPath, threshold]
         );
     };
 
