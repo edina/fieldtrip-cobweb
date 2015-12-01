@@ -93,11 +93,18 @@ define(['records', 'utils', 'file'], function(records, utils, file){
      * blurred.
      * @param e
      * @param image Path to file.
-     * @param threshold Blur threshold.  Any variance below this value is deemed
      * blurred.
      */
-    var checkImage = function(e, image, threshold){
+    var checkImage = function(e, image){
+        // threshold Blur threshold.  Any variance below this value is deemed
+        var threshold = $('#blur-threshold').attr('value') || 0;
+        if(threshold <= 0){
+            console.debug("Not checking image");
+            return;
+        }
+
         var imgPath = file.getFilePathWithoutProtocol(image);
+        console.debug("Check image: " + imgPath + ". threshold: " + threshold);
 
         var finish = function(){
             $.mobile.loading('hide');
