@@ -44,12 +44,8 @@ define(['records', 'utils', 'file'], function(records, utils, file){
             editorTitle = annotation.type;
         }
 
-        console.log("record properties added");
-        console.log(annotation);
         annotation.record.properties.id = utils.createUUID();
-        console.log(annotation.record.properties.id);
 
-        console.log(records.loadEditorsMetadata());
         //TO-DO, investigate of how to add some of these through cordova plugin
         //How about the camera ones?
         annotation.record = records.addRecordProperty(annotation.record, 'title', editorTitle);
@@ -79,7 +75,7 @@ define(['records', 'utils', 'file'], function(records, utils, file){
             };
 
             var addPropertFromCordovaError = function(error){
-                console.log(error);
+                console.error(error);
             };
 
             cordova.plugins.COBWEBSensorPlugin.lineOfSight('', addPropertFromCordova, addPropertFromCordovaError);
